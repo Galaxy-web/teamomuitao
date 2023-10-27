@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrossel 3D Divertido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .carousel-container {
+            width: 100%;
+            height: 500px; /* Aumentei a altura para acomodar melhor as imagens */
+            perspective: 1500px; /* Aumentei o raio de perspectiva */
+            margin: 0 auto;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 60s linear infinite;
+        }
+
+        .carousel img {
+            width: auto;
+            height: 100%;
+            position: absolute;
+            transform-origin: center;
+            transform: rotateY(0deg);
+            transition: transform 1s ease-in-out;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotateY(0deg);
+            }
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
+
+        #play-button {
+            background-color: #ff69b4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #background-music {
+            display: none; /* Ocultar a faixa de áudio */
+        }
+    </style>
+</head>
+<body>
+    <h1>Nossa Jornada de Um Ano</h1>
+
+    <div class="carousel-container">
+        <div class="carousel">
+            <!-- Adicione aqui as suas 63 fotos -->
+            <img src="22.jpg" alt="Photo 1">
+            <img src="23.jpg" alt="Photo 2">
+            <img src="24.jpg" alt="Photo 3">
+            <img src="25.jpg" alt="Photo 4">
+            <img src="26.jpg" alt="Photo 5">
+            <img src="27.jpg" alt="Photo 6">
+            <img src="28.jpg" alt="Photo 7">
+            <img src="29.jpg" alt="Photo 8">
+            <img src="30.jpg" alt="Photo 9">
+            <img src="31.jpg" alt="Photo 10">
+            <img src="32.jpg" alt="Photo 11">
+            <img src="33.jpg" alt="Photo 12">
+            <img src="34.jpg" alt="Photo 13">
+            <img src="35.jpg" alt="Photo 14">
+            <img src="36.jpg" alt="Photo 15">
+            <img src="37.jpg" alt="Photo 16">
+            <img src="38.jpg" alt="Photo 17">
+            <img src="39.jpg" alt="Photo 18">
+            <img src="40.jpg" alt="Photo 19">
+            <img src="41.jpg" alt="Photo 20">
+            <img src="42.jpg" alt="Photo 21">
+            <img src="43.jpg" alt="Photo 22">
+            <img src="44.jpg" alt="Photo 23">
+            <img src="45.jpg" alt="Photo 24">
+            <img src="46.jpg" alt="Photo 25">
+            <img src="47.jpg" alt="Photo 26">
+            <img src="48.jpg" alt="Photo 27">
+            <img src="49.jpg" alt="Photo 28">
+            <img src="50.jpg" alt="Photo 29">
+            <img src="51.jpg" alt="Photo 30">
+            <img src="52.jpg" alt="Photo 31">
+            <img src="53.jpg" alt="Photo 32">
+            <img src="54.jpg" alt="Photo 33">
+            <img src="55.jpg" alt="Photo 34">
+            <img src="56.jpg" alt="Photo 35">
+            <img src="57.jpg" alt="Photo 36">
+            <img src="58.jpg" alt="Photo 37">
+            <img src="59.jpg" alt="Photo 38">
+            <img src="60.jpg" alt="Photo 39">
+            <img src="61.jpg" alt="Photo 40">
+            <img src="62.jpg" alt="Photo 41">
+            <img src="63.jpg" alt="Photo 42">
+            <img src="64.jpg" alt="Photo 43">
+            <img src="65.jpg" alt="Photo 44">
+            <img src="66.jpg" alt="Photo 45">
+            <img src="67.jpg" alt="Photo 46">
+            <img src="68.jpg" alt="Photo 47">
+            <img src="69.jpg" alt="Photo 48">
+            <img src="70.jpg" alt="Photo 49">
+            <img src="71.jpg" alt="Photo 50">
+            <img src="72.jpg" alt="Photo 51">
+            <img src="73.jpg" alt="Photo 52">
+            <img src="74.jpg" alt="Photo 53">
+            <img src="75.jpg" alt="Photo 54">
+            <img src="76.jpg" alt="Photo 55">
+            <img src="77.jpg" alt="Photo 56">
+            <img src="78.jpg" alt="Photo 57">
+            <img src="79.jpg" alt="Photo 58">
+            <img src="80.jpg" alt="Photo 59">
+            <img src="81.jpg" alt="Photo 60">
+            <img src="82.jpg" alt="Photo 61">
+            <img src="83.jpg" alt="Photo 62">
+            <img src="84.jpg" alt="Photo 63">
+            <!-- Continue adicionando suas fotos -->
+        </div>
+    </div>
+
+    <button id="play-button">Play</button>
+
+    <audio id="background-music" controls loop>
+        <source src="romantic-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const carousel = document.querySelector('.carousel');
+        const playButton = document.getElementById('play-button');
+        const backgroundMusic = document.getElementById('background-music');
+
+        let isPlaying = false;
+
+        playButton.addEventListener('click', () => {
+            if (!isPlaying) {
+                carousel.style.animationPlayState = 'running';
+                backgroundMusic.play();
+                isPlaying = true;
+                playButton.textContent = 'Pause';
+            } else {
+                carousel.style.animationPlayState = 'paused';
+                backgroundMusic.pause();
+                isPlaying = false;
+                playButton.textContent = 'Play';
+            }
+        });
+
+        const images = document.querySelectorAll('.carousel img');
+        let rotationAngle = 0;
+
+        images.forEach((image, index) => {
+            image.style.transform = `rotateY(${rotationAngle}deg) translateZ(300px)`; // Aumentei o raio de rotação
+            rotationAngle += (360 / images.length);
+        });
+    </script>
+</body>
+</html>

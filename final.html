@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>1 Ano de Amor</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        /* Seu CSS personalizado aqui */
+        body {
+    font-family: 'Pacifico', cursive; /* Usar a fonte Pacifico */
+    background-image: url('romant.jpg');
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow: visible; /* ou auto */
+}
+
+/* Animação das estrelas */
+.star {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: twinkle 5s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1);
+    }
+}
+
+        .swiper-container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px; /* Definir a perspectiva para criar o efeito 3D */
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Manter a imagem dentro do espaço */
+            transition: transform 0.5s; /* Adicionar uma transição de transform para a imagem */
+        }
+
+        .swiper-slide-active img {
+            transform: rotateY(0deg); /* Definir o ângulo para a imagem ativa (0 graus) */
+        }
+
+        .swiper-slide-next img,
+        .swiper-slide-prev img {
+            transform: rotateY(45deg); /* Definir o ângulo para as imagens adjacentes (45 graus) */
+        }
+
+        .story {
+            padding: 20px;
+            font-size: 20px;
+            /* Sua história aqui */
+        }
+
+        .message {
+            background-color: #ffcccb;
+            padding: 20px;
+            font-size: 24px;
+            color: #c70039;
+            /* Adicione animações CSS para tornar este texto romântico */
+        }
+
+        /* CSS para o popup da carta */
+        .letter-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .letter-container {
+            background-color: #fff;
+            max-width: 90%;
+            border: 2px solid #e1e1e1;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            overflow: auto;
+        }
+
+        .letter-text {
+            font-family: 'Pacifico', cursive; /* Usar a fonte Pacifico */
+            font-size: 16px;
+            color: #333;
+            max-width: 100%;
+            white-space: pre-line;
+            padding: 20px;
+        }
+
+        .close-button {
+            font-family: 'Pacifico', cursive; /* Usar a fonte Pacifico */
+            font-size: 16px;
+            color: #c70039;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .close-button:hover {
+            text-decoration: underline;
+        }
+
+        audio {
+            display: none; /* Para ocultar o elemento de áudio */
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="22.jpg" alt="Foto 1"></div>
+            <div class="swiper-slide"><img src="32.jpg" alt="Foto 2"></div>
+            <div class="swiper-slide"><img src="39.jpg" alt="Foto 3"></div>
+            <div class="swiper-slide"><img src="43.jpg" alt="Foto 4"></div>
+            <div class="swiper-slide"><img src="48.jpg" alt="Foto 5"></div>
+            <div class="swiper-slide"><img src="52.jpg" alt="Foto 6"></div>
+            <div class="swiper-slide"><img src="59.jpg" alt="Foto 7"></div>
+            <div class="swiper-slide"><img src="64.jpg" alt="Foto 8"></div>
+            <div class="swiper-slide"><img src="71.jpg" alt="Foto 9"></div>
+            <!-- Repita este bloco para as outras 9 fotos -->
+            <div class="swiper-slide"><img src="83.jpg" alt="Foto 10"></div>
+            <!-- Adicione as outras imagens aqui -->
+        </div>
+
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+
+    <div class="story">
+        <!-- Adicione sua história aqui -->
+    </div>
+
+    <div class="message">
+        <h1>Feliz 1 Ano Juntos!</h1>
+    </div>
+
+    <div class="interaction">
+        <!-- Adicione elementos interativos aqui -->
+    </div>
+
+    <!-- Seu HTML existente aqui -->
+    <div class="interaction">
+        <a href="javascript:void(0)" id="read-letter-link">Ler Cartinha</a>
+    </div>
+
+    <!-- Adicione o elemento de áudio -->
+    <audio id="audio" src="seu-arquivo-de-audio.mp3"></audio>
+
+    <!-- Seu JavaScript existente aqui -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const readLetterLink = document.getElementById("read-letter-link");
+            let popupVisible = false;
+
+            readLetterLink.addEventListener("click", function() {
+                if (!popupVisible) {
+                    showLetterPopup();
+                    playAudio();
+                } else {
+                    closeLetterPopup();
+                    stopAudio();
+                }
+            });
+
+            function showLetterPopup() {
+                const popup = document.createElement("div");
+                popup.classList.add("letter-popup");
+                document.body.appendChild(popup);
+
+                const letterContainer = document.createElement("div");
+                letterContainer.classList.add("letter-container");
+                popup.appendChild(letterContainer);
+
+                const letterContent = `Minha Amada Carolzinha,
+                
+Hoje é um dia especial, um marco em nossa jornada juntos. Celebramos um ano de amor, de risos, de lágrimas e de descobertas incríveis. Um ano que parece uma vida inteira, pois cada momento ao seu lado é tão repleto de significado e profundidade que o tempo parece ter perdido sua linearidade.
+
+Lembro-me da primeira vez que nossos olhares se encontraram, como se o universo tivesse conspirado para nos unir. A faísca que surgiu naquele instante se transformou em um fogo ardente de paixão, carinho e respeito. E aqui estamos, um ano depois, mais apaixonados do que nunca.
+
+Cada dia que passamos juntos é uma bênção. Seu sorriso ilumina meu mundo e aquece meu coração nos momentos mais sombrios. Sua risada é a trilha sonora da minha felicidade, e seu toque é a paz que acalma minha alma.
+
+Nossas conversas profundas e nossos silêncios compartilhados têm sido as fundações do nosso amor. E os nossos sonhos, aqueles que imaginamos juntos, são como estrelas no céu noturno, brilhando com a promessa de um futuro incrível.
+
+Neste ano, superamos desafios e celebramos conquistas. Juntos, crescemos e evoluímos. Aprendemos que o amor é mais do que um sentimento; é uma escolha diária de estar ao lado da pessoa que faz o nosso coração bater mais forte.
+
+E, oh, como meu coração bate por você. Seu amor preenche cada canto da minha vida. Eu sou grato todos os dias por ter você ao meu lado. Você é minha inspiração, minha âncora, minha alegria, minha esperança.
+
+Comemorar um ano de namoro é apenas o começo de nossa jornada. Mal posso esperar para ver todas as aventuras, os sorrisos, os abraços e os beijos que o futuro nos reserva. Nosso amor só crescerá, porque é infinito.
+
+Amo você de um jeito que as palavras não podem descrever completamente. Meu amor por você é eterno, como as estrelas no céu. Então, hoje, em nosso primeiro aniversário, quero fazer uma promessa a você: estarei sempre ao seu lado, amando e cuidando de você, durante todos os nossos anos vindouros.
+
+Feliz 1º ano de namoro, minha querida. Obrigado por ser a luz da minha vida, o amor do meu coração e a razão da minha existência.`;
+
+                const letterText = document.createElement("p");
+                letterText.classList.add("letter-text");
+                letterText.innerHTML = letterContent; // Use a tag <pre> para preservar os espaços
+                letterContainer.appendChild(letterText);
+
+                const closeButton = document.createElement("p");
+                closeButton.classList.add("close-button");
+                closeButton.innerText = "Fechar Cartinha";
+                letterContainer.appendChild(closeButton);
+
+                closeButton.addEventListener("click", function() {
+                    closeLetterPopup();
+                    stopAudio();
+                });
+
+                popupVisible = true;
+            }
+
+            function closeLetterPopup() {
+                const popup = document.querySelector(".letter-popup");
+                if (popup) {
+                    document.body.removeChild(popup);
+                }
+                popupVisible = false;
+            }
+
+            function playAudio() {
+                const audio = document.getElementById("audio");
+                audio.play();
+            }
+
+            function stopAudio() {
+                const audio = document.getElementById("audio");
+                audio.pause();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1 ano de namoro</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>1 ano de namoro</h1>
+    <p>Para a pessoa mais especial da minha vida, com todo o meu amor.</p>
+  </header>
+
+  <section id="quiz">
+    <h2>Quiz de namoro e casamento</h2>
+    <div id="pergunta">
+      <p>Aguarde... Carregando pergunta...</p>
+    </div>
+    <form id="respostas"></form>
+    <div id="resultado"></div>
+    <button id="enviar" onclick="verificarResposta()">Enviar</button> <!-- Botão de Enviar -->
+  </section>
+
+  <section id="coracao">
+    <h2>Progresso do Quiz</h2>
+    <canvas id="coracaoCanvas" width="200" height="200"></canvas>
+  </section>
+
+  <script>
+    var perguntas = [
+      {
+        pergunta: "O que é mais importante em um relacionamento?",
+        respostas: ["Amor", "Confiança", "Comunicação"],
+        respostaCerta: "Amor"
+      },
+      {
+        pergunta: "Qual é a melhor maneira de celebrar aniversários de namoro?",
+        respostas: ["Jantar romântico", "Viagem a dois", "Presentes caros"],
+        respostaCerta: "Jantar romântico"
+      },
+      {
+        pergunta: "O que fazer quando surgem diferenças no casamento?",
+        respostas: ["Conversar e encontrar soluções", "Ignorar o problema", "Gritar e brigar"],
+        respostaCerta: "Conversar e encontrar soluções"
+      },
+      {
+    pergunta: "Qual é a capital do Brasil?",
+    respostas: ["Brasília", "Rio de Janeiro", "São Paulo", "Belo Horizonte"],
+    respostaCerta: "Brasília"
+  },
+  {
+    pergunta: "Qual é a cor do céu em um dia ensolarado?",
+    respostas: ["Azul", "Verde", "Vermelho", "Amarelo"],
+    respostaCerta: "Azul"
+  },
+  {
+    pergunta: "Qual é o maior planeta do nosso sistema solar?",
+    respostas: ["Júpiter", "Marte", "Vênus", "Saturno"],
+    respostaCerta: "Júpiter"
+  },
+  {
+    pergunta: "Qual é o animal terrestre mais rápido do mundo?",
+    respostas: ["Guepardo", "Leopardo", "Elefante", "Tigre"],
+    respostaCerta: "Guepardo"
+  },
+  {
+    pergunta: "Qual é a capital da França?",
+    respostas: ["Paris", "Londres", "Roma", "Madrid"],
+    respostaCerta: "Paris"
+  },
+  {
+    pergunta: "Quem escreveu 'Romeu e Julieta'?",
+    respostas: ["William Shakespeare", "Charles Dickens", "Jane Austen", "F. Scott Fitzgerald"],
+    respostaCerta: "William Shakespeare"
+  },
+  {
+    pergunta: "Qual é o maior oceano do mundo?",
+    respostas: ["Oceano Atlântico", "Oceano Índico", "Oceano Pacífico", "Oceano Ártico"],
+    respostaCerta: "Oceano Pacífico"
+  },
+  {
+    pergunta: "Qual é a maior cordilheira do mundo?",
+    respostas: ["Cordilheira dos Andes", "Cordilheira dos Alpes", "Cordilheira dos Apalaches", "Cordilheira dos Himalaias"],
+    respostaCerta: "Cordilheira dos Andes"
+  },
+  {
+    pergunta: "Quem pintou a 'Mona Lisa'?",
+    respostas: ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Michelangelo"],
+    respostaCerta: "Leonardo da Vinci"
+  },
+  {
+    pergunta: "Qual é o maior deserto do mundo?",
+    respostas: ["Deserto de Atacama", "Deserto do Saara", "Deserto da Arábia", "Deserto de Gobi"],
+    respostaCerta: "Deserto do Saara"
+  }
+
+      // Adicione mais perguntas sobre namoro e casamento aqui
+    ];
+    var perguntaAtual = 0;
+    var acertos = 0;
+
+    // Função para buscar perguntas da API
+    function buscarPerguntas() {
+      // Você pode substituir essa função se desejar buscar perguntas de uma API real.
+      // Por enquanto, estamos usando perguntas estáticas definidas no código.
+      carregarPergunta();
+    }
+
+    // Função para carregar uma pergunta
+    function carregarPergunta() {
+      if (perguntaAtual < perguntas.length) {
+        var perguntaAtualObj = perguntas[perguntaAtual];
+        mostrarPergunta(perguntaAtualObj);
+      } else {
+        mostrarResultado();
+      }
+    }
+
+    // Função para mostrar uma pergunta e suas respostas
+    function mostrarPergunta(pergunta) {
+      var perguntaDiv = document.getElementById("pergunta");
+      perguntaDiv.innerHTML = "<p>" + pergunta.pergunta + "</p>";
+
+      var respostasForm = document.getElementById("respostas");
+      respostasForm.innerHTML = "";
+
+      pergunta.respostas.forEach(function (resposta, index) {
+        var input = document.createElement("input");
+        input.type = "radio";
+        input.name = "resposta";
+        input.value = resposta;
+        input.id = "resposta-" + index;
+
+        var label = document.createElement("label");
+        label.htmlFor = "resposta-" + index;
+        label.textContent = resposta;
+
+        respostasForm.appendChild(input);
+        respostasForm.appendChild(label);
+      });
+    }
+
+    // Função para verificar a resposta do usuário
+    function verificarResposta() {
+      var respostas = document.getElementsByName("resposta");
+      var respostaSelecionada = null;
+      for (var i = 0; i < respostas.length; i++) {
+        if (respostas[i].checked) {
+          respostaSelecionada = respostas[i].value;
+          break;
+        }
+      }
+
+      if (respostaSelecionada === perguntas[perguntaAtual].respostaCerta) {
+        acertos++;
+        atualizarCoracao(acertos / perguntas.length); // Atualiza o coração
+      } else {
+        aplicarEfeitoErro(); // Aplica o efeito de erro 3D
+      }
+
+      perguntaAtual++;
+      carregarPergunta();
+    }
+
+    // Função para mostrar o resultado do quiz
+    function mostrarResultado() {
+      var resultadoDiv = document.getElementById("resultado");
+      resultadoDiv.textContent = "Você acertou " + acertos + " de " + perguntas.length + " perguntas!";
+    }
+
+    // Função para atualizar o coração
+    function atualizarCoracao(progresso) {
+      var coracaoCanvas = document.getElementById("coracaoCanvas");
+      var ctx = coracaoCanvas.getContext("2d");
+      ctx.clearRect(0, 0, coracaoCanvas.width, coracaoCanvas.height);
+
+      // Desenhe o coração preenchido com base no progresso
+      ctx.beginPath();
+      ctx.moveTo(100, 100);
+      ctx.lineTo(70, 50);
+      ctx.bezierCurveTo(70, 20, 100, 20, 100, 50);
+      ctx.bezierCurveTo(100, 20, 130, 20, 130, 50);
+      ctx.lineTo(100, 100);
+      ctx.fillStyle = "red";
+      ctx.fill();
+      ctx.closePath();
+
+      // Desenhe o contorno do coração
+      ctx.beginPath();
+      ctx.moveTo(100, 100);
+      ctx.lineTo(70, 50);
+      ctx.bezierCurveTo(70, 20, 100, 20, 100, 50);
+      ctx.bezierCurveTo(100, 20, 130, 20, 130, 50);
+      ctx.lineTo(100, 100);
+      ctx.strokeStyle = "red";
+      ctx.stroke();
+      ctx.closePath();
+
+      // Desenhe o progresso do coração
+      ctx.fillStyle = "red";
+      ctx.fillRect(70, 100, 60 * progresso, 20);
+    }
+
+    // Função para aplicar o efeito de erro 3D
+    function aplicarEfeitoErro() {
+      var coracaoCanvas = document.getElementById("coracaoCanvas");
+      coracaoCanvas.classList.add("erro");
+      setTimeout(function () {
+        coracaoCanvas.classList.remove("erro");
+      }, 500);
+    }
+
+    // Iniciar o quiz
+    carregarPergunta();
+  </script>
+
+  <footer>
+    <p>Copyright &copy; [Seu nome], 2023</p>
+  </footer>
+</body>
+</html>

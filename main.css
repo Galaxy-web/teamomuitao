@@ -1,0 +1,192 @@
+body {
+    font-family: 'Pacifico', cursive; /* Usar a fonte Pacifico */
+    background-image: url('romant3.jpg');
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow: visible; /* ou auto */
+}
+
+/* Animação das estrelas */
+.star {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: twinkle 5s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1);
+    }
+}
+
+
+/* Estilize o cabeçalho */
+header {
+  text-align: center;
+  background-color: #e91e63; /* Cor de fundo do cabeçalho */
+  padding: 20px;
+  color: #fff; /* Cor do texto no cabeçalho */
+}
+
+header h1 {
+  font-size: 36px;
+  font-family: 'cursive';
+}
+
+/* Estilize o parágrafo no cabeçalho */
+header p {
+  font-size: 18px;
+}
+
+#texto-romantico {
+  background-color: #f9f9f9; /* Cor de fundo suave */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+#texto-romantico p {
+  font-size: 20px;
+  line-height: 1.6;
+  margin: 10px;
+  font-family: 'cursive';
+}
+
+
+/* Estilize o formulário do quiz */
+#quiz {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilize o título do quiz */
+#quiz h2 {
+  color: #e91e63;
+  font-size: 24px;
+}
+
+/* Adicione outras regras CSS para diferentes seções, como fotos e dinâmicas */
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+        /* Outros estilos específicos para telas menores */
+    }
+}
+
+/* Estilize as perguntas e respostas do quiz */
+.pergunta {
+  margin: 10px 0;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+label {
+  cursor: pointer;
+}
+
+/* Estilize o resultado do quiz */
+#resultado {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+/* Estilize a seção de fotos */
+#fotos {
+  text-align: center;
+}
+
+.foto {
+  display: inline-block;
+  margin: 10px;
+}
+
+/* Estilize a seção de dinâmica */
+#dinamica {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Estilize o canvas de desenho do coração */
+canvas {
+  border: 2px solid #e91e63;
+  border-radius: 50%;
+}
+
+/* Estilize o rodapé */
+footer {
+  text-align: center;
+  background-color: #e91e63;
+  color: #fff;
+  padding: 10px;
+}
+
+/* Faça ajustes de estilo responsivo, se necessário */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 30px;
+  }
+
+  header p {
+    font-size: 16px;
+  }
+
+  #texto-romantico p {
+    font-size: 18px;
+  }
+
+  #quiz h2 {
+    font-size: 22px;
+  }
+
+  .pergunta {
+    font-size: 16px;
+  }
+
+  /* Adicione mais estilos responsivos conforme necessário */
+}
+
+@media (max-width: 768px) {
+  /* Estilos específicos para telas menores, por exemplo, smartphones */
+}
+
+.foto {
+  display: inline-block;
+  margin: 10px;
+  transition: transform 0.2s; /* Adicione uma transição de 0.2 segundos */
+}
+
+.foto:hover {
+  transform: scale(1.1); /* Aumente a escala da foto ao passar o mouse */
+}
+
+/* Estilo para o botão */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff6b6b;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #ff4040;
+}
+
+

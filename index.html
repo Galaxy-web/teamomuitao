@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Página de Entrada</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('dois10.jpg'); /* Insira o caminho para a sua imagem de fundo */
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #surpresa-button {
+            background-color: #ff69b4; /* Cor de fundo do botão (Rosa) */
+            color: #fff; /* Cor do texto do botão (branco) */
+            border: none;
+            border-radius: 30px;
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #surpresa-button:hover {
+            background-color: #ff1493; /* Cor de fundo do botão ao passar o mouse (Tom mais escuro de rosa) */
+        }
+
+        #hearts-container {
+            display: none;
+        }
+
+        .heart {
+            display: inline-block;
+            font-size: 24px;
+            color: #ff1493; /* Cor dos corações (Rosa) */
+            animation: float 3s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <button id="surpresa-button" onclick="mostrarCorações()"><a href="pagina2.html" class="button">Preparada para a surpresa?</a></button>
+    <div id="hearts-container"></div>
+
+    <script>
+        function mostrarCorações() {
+            document.getElementById('surpresa-button').style.display = 'none';
+            const heartsContainer = document.getElementById('hearts-container');
+            heartsContainer.style.display = 'block';
+
+            for (let i = 0; i < 10; i++) {
+                const heart = document.createElement('span');
+                heart.className = 'heart';
+                heart.innerHTML = '❤';
+                heartsContainer.appendChild(heart);
+            }
+        }
+    </script>
+</body>
+</html>
